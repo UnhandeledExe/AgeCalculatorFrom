@@ -1,0 +1,38 @@
+﻿@page
+@model AgeCalculatorFrom.Pages.ShowDataModel
+@{
+    ViewData["Title"] = "Data";
+}
+
+<div class="text-center">
+    <h1 class="display-4">Chart</h1>
+</div>
+
+<script type="text/javascript" src="https://gstatic.com/charts/loader.js"></script>
+<script type="text/javascript">
+google.charts.load('current', { 'packages': ['corecharts'] });
+google.charts.setOnLoadCallback(drawChart);
+
+function drawChart() {
+    var data = google.visualization.arrayToDataTable([
+        ['Age'],
+
+    @foreach (var data in Model.chartDataList)
+    {
+        <text>['@data.Age']</text>   
+    }
+    ]);
+
+    var options = {
+        title: 'Title',
+        curveType: 'Function',
+        pointsVisible: true,
+        lineWidth: 3,
+        legende: 'none'
+    };
+    var chart = new google.visualization.LineChart(document.getElementById('line_chart'));
+    chart.drawChart(data, options)
+}
+</script>
+
+<div id="line_chart"></div>

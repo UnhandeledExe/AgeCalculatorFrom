@@ -1,4 +1,6 @@
-﻿namespace AgeCalculatorFrom.Models
+﻿using Microsoft.Data.SqlClient;
+
+namespace AgeCalculatorFrom.Models
 {
     public class Person
     {
@@ -29,6 +31,25 @@
         {
             get { return ageCalculate(Birthday); }
             set { }
+        }
+        public List<Person> GetChartData(string connectionString)
+        {
+            List<Person> chartDataList = new List<Person>();
+            SqlConnection con = new SqlConnection(connectionString);
+            string selectSQL = "SELECT Age FROM Person";
+            con.Open();
+            SqlCommand cmd = new SqlCommand(selectSQL, con);
+            SqlDataReader dr = cmd.ExecuteReader();
+            if (dr != null)
+            {
+                while (dr.Read())
+                {
+                    Person person = new Person();
+                    person.Age = Convert.ToInt32(dr["Age"]);
+                    chartDataList.Add(person);
+                }
+            }
+            return chartDataList;
         }
     }
     public enum Genders
