@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using AgeCalculatorFrom.Data;
 using AgeCalculatorFrom.Models;
+using Microsoft.Data.SqlClient;
 
 namespace AgeCalculatorFrom.Pages.People
 {
@@ -23,6 +24,8 @@ namespace AgeCalculatorFrom.Pages.People
         [BindProperty]
         public Person Person { get; set; } = default!;
 
+        public SelectList Cities { get; set; }
+
         public async Task<IActionResult> OnGetAsync(int? id)
         {
             if (id == null || _context.People == null)
@@ -36,6 +39,7 @@ namespace AgeCalculatorFrom.Pages.People
                 return NotFound();
             }
             Person = person;
+            this.Cities = new SelectList(PopulateCities(), "Name");
             return Page();
         }
 
@@ -72,6 +76,31 @@ namespace AgeCalculatorFrom.Pages.People
         private bool PersonExists(int id)
         {
           return (_context.People?.Any(e => e.ID == id)).GetValueOrDefault();
+        }
+
+        private static List<String> PopulateCities()
+        {
+            string constr = @"Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=AgeCalculatorFrom.Data;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
+            List<String> cities = new List<String>();
+            using (SqlConnection con = new SqlConnection(constr))
+            {
+                string query = "SELECT Name FROM City";
+                using (SqlCommand cmd = new SqlCommand(query))
+                {
+                    cmd.Connection = con;
+                    con.Open();
+                    using (SqlDataReader sdr = cmd.ExecuteReader())
+                    {
+                        while (sdr.Read())
+                        {
+                            cities.Add(sdr.GetString(0));
+                        }
+                    }
+                    con.Close();
+                }
+            }
+
+            return cities;
         }
     }
 }
