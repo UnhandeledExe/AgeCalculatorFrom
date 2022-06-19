@@ -1,4 +1,5 @@
 ﻿using Microsoft.Data.SqlClient;
+using System.ComponentModel.DataAnnotations;
 
 namespace AgeCalculatorFrom.Models
 {
@@ -24,6 +25,8 @@ namespace AgeCalculatorFrom.Models
         public int ID { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
+        [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:dd-MM-yyyy}", ApplyFormatInEditMode = true)]
         public DateTime Birthday { get; set; }
         public Genders Gender { get; set; }
         public string City { get; set; }

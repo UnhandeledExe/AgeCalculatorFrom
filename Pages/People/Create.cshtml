@@ -25,7 +25,7 @@
             </div>
             <div class="form-group">
                 <label asp-for="Person.Birthday" class="control-label"></label>
-                <input asp-for="Person.Birthday" class="form-control" />
+                <input asp-for="Person.Birthday" max="@DateTime.Now.ToString("yyyy-MM-dd")" class="form-control" />
                 <span asp-validation-for="Person.Birthday" class="text-danger"></span>
             </div>
             <div class="form-group">
@@ -38,7 +38,9 @@
             </div>
             <div class="form-group">
                 <label asp-for="Person.City" class="control-label"></label>
-                <input asp-for="Person.City" class="form-control" />
+                <select asp-for="Person.City" class="form-control" asp-items="@Model.Cities">
+                    <option value="0">Select a city</option>
+                </select>
                 <span asp-validation-for="Person.City" class="text-danger"></span>
             </div>
             <div class="form-group">
