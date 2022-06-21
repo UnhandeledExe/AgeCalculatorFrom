@@ -65,6 +65,9 @@ namespace AgeCalculatorFrom.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<byte[]>("ProfileImage")
+                        .HasColumnType("varbinary(max)");
+
                     b.HasKey("ID");
 
                     b.ToTable("Person", (string)null);

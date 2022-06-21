@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace AgeCalculatorFrom.Migrations
 {
     [DbContext(typeof(PeopleContext))]
-    [Migration("20220612171821_InitialCreate")]
+    [Migration("20220621221619_InitialCreate")]
     partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -69,6 +69,9 @@ namespace AgeCalculatorFrom.Migrations
                     b.Property<string>("LastName")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<byte[]>("ProfileImage")
+                        .HasColumnType("varbinary(max)");
 
                     b.HasKey("ID");
 
