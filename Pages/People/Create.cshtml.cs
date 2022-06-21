@@ -40,6 +40,21 @@ namespace AgeCalculatorFrom.Pages.People
             return RedirectToPage("./Index");
         }
 
+        [HttpPost]
+        public async Task<IActionResult> UploadImage()
+        {
+            MemoryStream ms = new MemoryStream();
+            Request.Form.Files[0].CopyTo(ms);
+            Person.ProfileImage = ms.ToArray();
+
+            ms.Close();
+            ms.Dispose();
+
+            _context.People.Add(Person);
+            await _context.SaveChangesAsync();
+            return RedirectToPage("./Index");
+        }
+
         private static List<String> PopulateCities()
         {
             string constr = @"Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=AgeCalculatorFrom.Data;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";

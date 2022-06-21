@@ -24,6 +24,9 @@
     <thead>
         <tr>
             <th>
+                @Html.DisplayNameFor(model => model.Person[0].ProfileImage)
+            </th>
+            <th>
                 <a asp-page="./Index" asp-route-sortOrder="@Model.FnameSort">
                     @Html.DisplayNameFor(model => model.Person[0].FirstName)
                 </a>
@@ -55,6 +58,9 @@
     <tbody>
 @foreach (var item in Model.Person) {
         <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.ProfileImage)
+            </td>
             <td>
                 @Html.DisplayFor(modelItem => item.FirstName)
             </td>

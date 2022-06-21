@@ -23,6 +23,9 @@ namespace AgeCalculatorFrom.Models
         }
 
         public int ID { get; set; }
+
+        public byte[]? ProfileImage { get; set; }
+
         public string FirstName { get; set; }
         public string LastName { get; set; }
         [DataType(DataType.Date)]
