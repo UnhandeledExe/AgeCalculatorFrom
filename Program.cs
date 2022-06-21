@@ -1,5 +1,4 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.DependencyInjection;
 using AgeCalculatorFrom.Data;
 using AgeCalculatorFrom.Models;
 

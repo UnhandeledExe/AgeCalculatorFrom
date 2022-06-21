@@ -1,5 +1,4 @@
 using AgeCalculatorFrom.Models;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace AgeCalculatorFrom.Pages

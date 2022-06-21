@@ -1,11 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.RazorPages;
+﻿using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
-using AgeCalculatorFrom.Data;
 using AgeCalculatorFrom.Models;
 
 namespace AgeCalculatorFrom.Pages.People
@@ -75,10 +69,6 @@ namespace AgeCalculatorFrom.Pages.People
 
             Person = await peopleIQ.AsNoTracking().ToListAsync();
 
-            /*if (_context.People != null)
-            {
-                Person = await _context.People.ToListAsync();
-            }*/
         }
     }
 }
