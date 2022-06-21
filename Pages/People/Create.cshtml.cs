@@ -88,11 +88,4 @@ namespace AgeCalculatorFrom.Pages.People
             return cities;
         }
     }
-
-    public class PhotoBuffer
-    {
-        [Required]
-        [Display(Name = "File")]
-        public IFormFile FormFile { get; set; }
-    }
 }
