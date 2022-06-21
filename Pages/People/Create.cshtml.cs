@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using AgeCalculatorFrom.Data;
 using AgeCalculatorFrom.Models;
 using Microsoft.Data.SqlClient;
+using System.ComponentModel.DataAnnotations;
 
 namespace AgeCalculatorFrom.Pages.People
 {
@@ -31,6 +32,7 @@ namespace AgeCalculatorFrom.Pages.People
         [BindProperty]
         public Person Person { get; set; } = default!;
 
+
         // To protect from overposting attacks, see https://aka.ms/RazorPagesCRUD
         public async Task<IActionResult> OnPostAsync()
         {
@@ -42,6 +44,21 @@ namespace AgeCalculatorFrom.Pages.People
             _context.People.Add(Person);
             await _context.SaveChangesAsync();
 
+            return RedirectToPage("./Index");
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> UploadImage()
+        {
+            MemoryStream ms = new MemoryStream();
+            Request.Form.Files[0].CopyTo(ms);
+            Person.ProfileImage = ms.ToArray();
+
+            ms.Close();
+            ms.Dispose();
+
+            _context.People.Add(Person);
+            await _context.SaveChangesAsync();
             return RedirectToPage("./Index");
         }
 
@@ -62,6 +79,7 @@ namespace AgeCalculatorFrom.Pages.People
                         {
                             cities.Add(sdr.GetString(0));
                         }
+                        cities.Sort();
                     }
                     con.Close();
                 }
@@ -69,5 +87,12 @@ namespace AgeCalculatorFrom.Pages.People
 
             return cities;
         }
+    }
+
+    public class PhotoBuffer
+    {
+        [Required]
+        [Display(Name = "File")]
+        public IFormFile FormFile { get; set; }
     }
 }

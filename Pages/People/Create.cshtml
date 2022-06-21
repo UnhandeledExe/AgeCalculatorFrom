@@ -1,4 +1,5 @@
 ﻿@page
+@using System.Web.Helpers
 @model AgeCalculatorFrom.Pages.People.CreateModel
 
 @{
@@ -11,8 +12,13 @@
 <hr />
 <div class="row">
     <div class="col-md-4">
-        <form method="post">
+        <form asp-action="UploadImage" method="post" enctype="multipart/form-data">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Person.ProfileImage" class="control-label"></label>
+                <input type="file" asp-for="Person.ProfileImage" class="form-control" />
+                <span asp-validation-for="Person.ProfileImage" class="text-danger"></span>
+            </div>
             <div class="form-group">
                 <label asp-for="Person.FirstName" class="control-label"></label>
                 <input asp-for="Person.FirstName" class="form-control" />

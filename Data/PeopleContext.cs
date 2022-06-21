@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using AgeCalculatorFrom.Models;
+using Microsoft.AspNetCore.Mvc;
 
 namespace AgeCalculatorFrom.Data
 {
@@ -22,5 +23,7 @@ namespace AgeCalculatorFrom.Data
             modelBuilder.Entity<Person>().ToTable("Person");
             modelBuilder.Entity<City>().ToTable("City");
         }
+
+
     }
 }
